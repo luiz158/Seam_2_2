@@ -1,0 +1,6 @@
+build.properties
+.classpath
+classes
+build
+lib
+src/main/org/jboss/seam/text/
