@@ -6,6 +6,20 @@
    <persistence-unit name="dvdstoreDatabase">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <jta-data-source>java:/dvdstoreDatasource</jta-data-source>
+
+<!--  org.jboss.as.jpa.hibernate3.HibernateAnnotationScanner in Module "deployment.seam-dvdstore.ear:main" 
+from Service Module Loader: java.lang.LinkageError: Failed to link org/jboss/as/jpa/hibernate3/HibernateAnnotationScanner  -->
+    <class>com.jboss.dvd.seam.Actor</class>
+    <class>com.jboss.dvd.seam.Admin</class>
+    <class>com.jboss.dvd.seam.Category</class>
+    <class>com.jboss.dvd.seam.Customer</class>
+    <class>com.jboss.dvd.seam.Inventory</class>
+    <class>com.jboss.dvd.seam.Order</class>
+    <class>com.jboss.dvd.seam.OrderLine</class>
+    <class>com.jboss.dvd.seam.Product</class>
+    <class>com.jboss.dvd.seam.Product</class>
+    <class>com.jboss.dvd.seam.User</class>
+      
       <properties>
          <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
          <property name="hibernate.cache.use_query_cache" value="true"/>
@@ -22,6 +36,11 @@
 
          <property name="jboss.entity.manager.factory.jndi.name"
                    value="java:/dvdstoreEntityManagerFactory" />
+
+          <property name="jboss.as.jpa.providerModule" value="hibernate3-bundled" />
+          
+          <!--  -->
+          <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>                   
       </properties>
    </persistence-unit>
 </persistence>

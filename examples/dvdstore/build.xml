@@ -19,6 +19,16 @@
 	<property name="example.ds" value="jboss-seam-dvdstore-ds.xml" />
 	
 	<target name="init" depends="gethsearch3.1">
+		<copy todir="${example.lib.dir}">
+            <fileset dir="${lib.dir}">
+            	<include name="antlr.jar" />
+    	        <include name="bsh.jar" />
+    	        <include name="hibernate-core.jar" />
+    	        <include name="hibernate-validator.jar" />
+    	        <include name="hibernate-annotations.jar" />
+    	        <include name="hibernate-entitymanager.jar" />
+            </fileset>
+        </copy>
 		<fileset id="ear.lib.extras" dir="${example.lib.dir}">
 			<include name="*.jar"/>
 		</fileset>
@@ -55,7 +65,7 @@
 		<include name="*.jpdl.xml" />
 		<exclude name=".gpd.*.jpdl.xml" />
 	</fileset>
-	
+		
 	<target name="jboss42" description="Build the DvdStore example artifacts, and deploy to JBoss AS 4.2.x.GA">
 		<ant antfile="build-jboss42.xml"/>
 	</target>
@@ -66,4 +76,23 @@
 	
 	<import file="../build.xml" />
 	
+   <!-- Resources to go in the ear -->
+    <fileset id="ear.resources" dir="${resources.dir}">
+        <include name="META-INF/application.xml" />
+    <!--        <include name="META-INF/jboss-app.xml" /> -->
+        <include name="META-INF/jboss-deployment-structure.xml" />
+        <exclude name=".gpd.*" />
+        <exclude name="*.cfg.xml" />        
+    </fileset>
+	
+   <!-- resources to go in the jar  -->
+    <fileset id="jar.resources" dir="${resources.dir}">
+        <include name="import.sql" />
+        <include name="seam.properties" />
+        <include name="META-INF/persistence.xml" />
+        <include name="META-INF/ejb-jar.xml" />
+        <include name="*.jpdl.xml" />
+        <include name="*.cfg.xml" />    	
+        <exclude name=".gpd*" />
+    </fileset>
 </project>
